@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\SubjectGrade;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -33,6 +34,11 @@ class StudentController extends Controller
        //return Student::whereIn('id', [1,3,5,7,9,11])->get();
 
       // return Student::where('province', 'california')->first();
+
+      return Student::with(['grade' => function($query){
+        return $query->where('grade', '>=', 90);
+      }])->get();
+
 
 
     }
@@ -88,4 +94,6 @@ class StudentController extends Controller
     {
         //
     }
+
+    
 }

@@ -27,6 +27,12 @@ class Student extends Model
     public function getFullnameAttribute()
     {
         return $this->fname . '   ' . $this->lname;
+
+    }
+
+    public function grade()
+    {
+        return $this->hasMany(SubjectGrade::class, 'student_id');
     }
 
 }
