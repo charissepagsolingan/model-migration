@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use App\Models\SubjectGrade;
+//use App\Models\SubjectGrade;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -13,7 +13,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::all();
+        $data['students'] = Student::all();
+        return view('students.index',$data);
+        //return Student::all();
 
        // return Student::where('province', 'Wisconsin')
        //     ->where('fname', 'Jettie')
@@ -67,6 +69,8 @@ class StudentController extends Controller
         $student->zip = $request['zip'];
         $student->birthdate = $request['birthdate'];
         $student->save();
+
+        return redirect()->to('students');
 
     }
 
